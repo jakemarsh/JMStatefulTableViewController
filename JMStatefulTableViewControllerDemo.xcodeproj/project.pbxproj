@@ -1,0 +1,263 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 46;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		30CAA0E11552CA980010293B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CAA0E01552CA980010293B /* UIKit.framework */; };
+		30CAA0E31552CA980010293B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CAA0E21552CA980010293B /* Foundation.framework */; };
+		30CAA0E51552CA980010293B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CAA0E41552CA980010293B /* CoreGraphics.framework */; };
+		30CAA0EB1552CA980010293B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30CAA0E91552CA980010293B /* InfoPlist.strings */; };
+		30CAA0ED1552CA980010293B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA0EC1552CA980010293B /* main.m */; };
+		30CAA0F11552CA980010293B /* JMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA0F01552CA980010293B /* JMAppDelegate.m */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		30CAA0DC1552CA980010293B /* JMStatefulTableViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMStatefulTableViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		30CAA0E01552CA980010293B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
+		30CAA0E21552CA980010293B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
+		30CAA0E41552CA980010293B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
+		30CAA0E81552CA980010293B /* JMStatefulTableViewControllerDemo-Info.plist */ = {isa = PBXFileReference; path = "JMStatefulTableViewControllerDemo-Info.plist"; sourceTree = "<group>"; };
+		30CAA0EA1552CA980010293B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
+		30CAA0EC1552CA980010293B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
+		30CAA0EE1552CA980010293B /* JMStatefulTableViewControllerDemo-Prefix.pch */ = {isa = PBXFileReference; path = "JMStatefulTableViewControllerDemo-Prefix.pch"; sourceTree = "<group>"; };
+		30CAA0EF1552CA980010293B /* JMAppDelegate.h */ = {isa = PBXFileReference; path = JMAppDelegate.h; sourceTree = "<group>"; };
+		30CAA0F01552CA980010293B /* JMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAppDelegate.m; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		30CAA0D91552CA980010293B /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30CAA0E11552CA980010293B /* UIKit.framework in Frameworks */,
+				30CAA0E31552CA980010293B /* Foundation.framework in Frameworks */,
+				30CAA0E51552CA980010293B /* CoreGraphics.framework in Frameworks */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		30CAA0D11552CA970010293B = {
+			isa = PBXGroup;
+			children = (
+				30CAA0E61552CA980010293B /* JMStatefulTableViewControllerDemo */,
+				30CAA0DF1552CA980010293B /* Frameworks */,
+				30CAA0DD1552CA980010293B /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		30CAA0DD1552CA980010293B /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				30CAA0DC1552CA980010293B /* JMStatefulTableViewControllerDemo.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		30CAA0DF1552CA980010293B /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+				30CAA0E01552CA980010293B /* UIKit.framework */,
+				30CAA0E21552CA980010293B /* Foundation.framework */,
+				30CAA0E41552CA980010293B /* CoreGraphics.framework */,
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		30CAA0E61552CA980010293B /* JMStatefulTableViewControllerDemo */ = {
+			isa = PBXGroup;
+			children = (
+				30CAA0EF1552CA980010293B /* JMAppDelegate.h */,
+				30CAA0F01552CA980010293B /* JMAppDelegate.m */,
+				30CAA0E71552CA980010293B /* Supporting Files */,
+			);
+			path = JMStatefulTableViewControllerDemo;
+			sourceTree = "<group>";
+		};
+		30CAA0E71552CA980010293B /* Supporting Files */ = {
+			isa = PBXGroup;
+			children = (
+				30CAA0E81552CA980010293B /* JMStatefulTableViewControllerDemo-Info.plist */,
+				30CAA0E91552CA980010293B /* InfoPlist.strings */,
+				30CAA0EC1552CA980010293B /* main.m */,
+				30CAA0EE1552CA980010293B /* JMStatefulTableViewControllerDemo-Prefix.pch */,
+			);
+			name = "Supporting Files";
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		30CAA0DB1552CA980010293B /* JMStatefulTableViewControllerDemo */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 30CAA0F41552CA980010293B /* Build configuration list for PBXNativeTarget "JMStatefulTableViewControllerDemo" */;
+			buildPhases = (
+				30CAA0D81552CA980010293B /* Sources */,
+				30CAA0D91552CA980010293B /* Frameworks */,
+				30CAA0DA1552CA980010293B /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = JMStatefulTableViewControllerDemo;
+			productName = JMStatefulTableViewControllerDemo;
+			productReference = 30CAA0DC1552CA980010293B /* JMStatefulTableViewControllerDemo.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		30CAA0D31552CA970010293B /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				CLASSPREFIX = JM;
+				LastUpgradeCheck = 0430;
+				ORGANIZATIONNAME = "Rubber Duck Software";
+			};
+			buildConfigurationList = 30CAA0D61552CA970010293B /* Build configuration list for PBXProject "JMStatefulTableViewControllerDemo" */;
+			compatibilityVersion = "Xcode 3.2";
+			developmentRegion = English;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+			);
+			mainGroup = 30CAA0D11552CA970010293B;
+			productRefGroup = 30CAA0DD1552CA980010293B /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				30CAA0DB1552CA980010293B /* JMStatefulTableViewControllerDemo */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		30CAA0DA1552CA980010293B /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30CAA0EB1552CA980010293B /* InfoPlist.strings in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		30CAA0D81552CA980010293B /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				30CAA0ED1552CA980010293B /* main.m in Sources */,
+				30CAA0F11552CA980010293B /* JMAppDelegate.m in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin PBXVariantGroup section */
+		30CAA0E91552CA980010293B /* InfoPlist.strings */ = {
+			isa = PBXVariantGroup;
+			children = (
+				30CAA0EA1552CA980010293B /* en */,
+			);
+			name = InfoPlist.strings;
+			sourceTree = "<group>";
+		};
+/* End PBXVariantGroup section */
+
+/* Begin XCBuildConfiguration section */
+		30CAA0F21552CA980010293B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = NO;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_SYMBOLS_PRIVATE_EXTERN = NO;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				SDKROOT = iphoneos;
+			};
+			name = Debug;
+		};
+		30CAA0F31552CA980010293B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				ARCHS = "$(ARCHS_STANDARD_32_BIT)";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
+				COPY_PHASE_STRIP = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu99;
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 5.1;
+				OTHER_CFLAGS = "-DNS_BLOCK_ASSERTIONS=1";
+				SDKROOT = iphoneos;
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		30CAA0F51552CA980010293B /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Prefix.pch";
+				INFOPLIST_FILE = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Debug;
+		};
+		30CAA0F61552CA980010293B /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				GCC_PRECOMPILE_PREFIX_HEADER = YES;
+				GCC_PREFIX_HEADER = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Prefix.pch";
+				INFOPLIST_FILE = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Info.plist";
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				WRAPPER_EXTENSION = app;
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		30CAA0D61552CA970010293B /* Build configuration list for PBXProject "JMStatefulTableViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30CAA0F21552CA980010293B /* Debug */,
+				30CAA0F31552CA980010293B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		30CAA0F41552CA980010293B /* Build configuration list for PBXNativeTarget "JMStatefulTableViewControllerDemo" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				30CAA0F51552CA980010293B /* Debug */,
+				30CAA0F61552CA980010293B /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 30CAA0D31552CA970010293B /* Project object */;
+}
