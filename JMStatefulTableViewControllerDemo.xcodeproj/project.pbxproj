@@ -7,25 +7,40 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		30BD9BE01553077A006B103A /* DemoTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30BD9BDF1553077A006B103A /* DemoTableViewController.m */; };
 		30CAA0E11552CA980010293B /* UIKit.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CAA0E01552CA980010293B /* UIKit.framework */; };
 		30CAA0E31552CA980010293B /* Foundation.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CAA0E21552CA980010293B /* Foundation.framework */; };
 		30CAA0E51552CA980010293B /* CoreGraphics.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 30CAA0E41552CA980010293B /* CoreGraphics.framework */; };
 		30CAA0EB1552CA980010293B /* InfoPlist.strings in Resources */ = {isa = PBXBuildFile; fileRef = 30CAA0E91552CA980010293B /* InfoPlist.strings */; };
 		30CAA0ED1552CA980010293B /* main.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA0EC1552CA980010293B /* main.m */; };
 		30CAA0F11552CA980010293B /* JMAppDelegate.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA0F01552CA980010293B /* JMAppDelegate.m */; };
+		30CAA0F91552CABF0010293B /* JMStatefulTableViewController.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA0F81552CABF0010293B /* JMStatefulTableViewController.m */; };
+		30CAA1071552CBD40010293B /* JMStatefulTableViewEmptyView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA1061552CBD40010293B /* JMStatefulTableViewEmptyView.m */; };
+		30CAA10B1552CC0B0010293B /* JMStatefulTableViewLoadingView.m in Sources */ = {isa = PBXBuildFile; fileRef = 30CAA10A1552CC0B0010293B /* JMStatefulTableViewLoadingView.m */; };
+		C7656E72079147278CF8996A /* libPods.a in Frameworks */ = {isa = PBXBuildFile; fileRef = 6FE64582D301446980CC3EFE /* libPods.a */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		30BD9BDE1553077A006B103A /* DemoTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = DemoTableViewController.h; sourceTree = "<group>"; };
+		30BD9BDF1553077A006B103A /* DemoTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = DemoTableViewController.m; sourceTree = "<group>"; };
 		30CAA0DC1552CA980010293B /* JMStatefulTableViewControllerDemo.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = JMStatefulTableViewControllerDemo.app; sourceTree = BUILT_PRODUCTS_DIR; };
 		30CAA0E01552CA980010293B /* UIKit.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = UIKit.framework; path = System/Library/Frameworks/UIKit.framework; sourceTree = SDKROOT; };
 		30CAA0E21552CA980010293B /* Foundation.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Foundation.framework; path = System/Library/Frameworks/Foundation.framework; sourceTree = SDKROOT; };
 		30CAA0E41552CA980010293B /* CoreGraphics.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = CoreGraphics.framework; path = System/Library/Frameworks/CoreGraphics.framework; sourceTree = SDKROOT; };
-		30CAA0E81552CA980010293B /* JMStatefulTableViewControllerDemo-Info.plist */ = {isa = PBXFileReference; path = "JMStatefulTableViewControllerDemo-Info.plist"; sourceTree = "<group>"; };
+		30CAA0E81552CA980010293B /* JMStatefulTableViewControllerDemo-Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = "JMStatefulTableViewControllerDemo-Info.plist"; sourceTree = "<group>"; };
 		30CAA0EA1552CA980010293B /* en */ = {isa = PBXFileReference; lastKnownFileType = text.plist.strings; name = en; path = en.lproj/InfoPlist.strings; sourceTree = "<group>"; };
 		30CAA0EC1552CA980010293B /* main.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = main.m; sourceTree = "<group>"; };
-		30CAA0EE1552CA980010293B /* JMStatefulTableViewControllerDemo-Prefix.pch */ = {isa = PBXFileReference; path = "JMStatefulTableViewControllerDemo-Prefix.pch"; sourceTree = "<group>"; };
-		30CAA0EF1552CA980010293B /* JMAppDelegate.h */ = {isa = PBXFileReference; path = JMAppDelegate.h; sourceTree = "<group>"; };
+		30CAA0EE1552CA980010293B /* JMStatefulTableViewControllerDemo-Prefix.pch */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = "JMStatefulTableViewControllerDemo-Prefix.pch"; sourceTree = "<group>"; };
+		30CAA0EF1552CA980010293B /* JMAppDelegate.h */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.h; path = JMAppDelegate.h; sourceTree = "<group>"; };
 		30CAA0F01552CA980010293B /* JMAppDelegate.m */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.c.objc; path = JMAppDelegate.m; sourceTree = "<group>"; };
+		30CAA0F71552CABF0010293B /* JMStatefulTableViewController.h */ = {isa = PBXFileReference; fileEncoding = 4; path = JMStatefulTableViewController.h; sourceTree = "<group>"; };
+		30CAA0F81552CABF0010293B /* JMStatefulTableViewController.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStatefulTableViewController.m; sourceTree = "<group>"; };
+		30CAA1051552CBD40010293B /* JMStatefulTableViewEmptyView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStatefulTableViewEmptyView.h; sourceTree = "<group>"; };
+		30CAA1061552CBD40010293B /* JMStatefulTableViewEmptyView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStatefulTableViewEmptyView.m; sourceTree = "<group>"; };
+		30CAA1091552CC0B0010293B /* JMStatefulTableViewLoadingView.h */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.h; path = JMStatefulTableViewLoadingView.h; sourceTree = "<group>"; };
+		30CAA10A1552CC0B0010293B /* JMStatefulTableViewLoadingView.m */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.c.objc; path = JMStatefulTableViewLoadingView.m; sourceTree = "<group>"; };
+		6FE64582D301446980CC3EFE /* libPods.a */ = {isa = PBXFileReference; explicitFileType = archive.ar; includeInIndex = 0; path = libPods.a; sourceTree = BUILT_PRODUCTS_DIR; };
+		E6CF65DC10EE494FA0570F0C /* Pods.xcconfig */ = {isa = PBXFileReference; lastKnownFileType = text.xcconfig; name = Pods.xcconfig; path = Pods/Pods.xcconfig; sourceTree = SOURCE_ROOT; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -36,6 +51,7 @@
 				30CAA0E11552CA980010293B /* UIKit.framework in Frameworks */,
 				30CAA0E31552CA980010293B /* Foundation.framework in Frameworks */,
 				30CAA0E51552CA980010293B /* CoreGraphics.framework in Frameworks */,
+				C7656E72079147278CF8996A /* libPods.a in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -48,6 +64,7 @@
 				30CAA0E61552CA980010293B /* JMStatefulTableViewControllerDemo */,
 				30CAA0DF1552CA980010293B /* Frameworks */,
 				30CAA0DD1552CA980010293B /* Products */,
+				E6CF65DC10EE494FA0570F0C /* Pods.xcconfig */,
 			);
 			sourceTree = "<group>";
 		};
@@ -65,6 +82,7 @@
 				30CAA0E01552CA980010293B /* UIKit.framework */,
 				30CAA0E21552CA980010293B /* Foundation.framework */,
 				30CAA0E41552CA980010293B /* CoreGraphics.framework */,
+				6FE64582D301446980CC3EFE /* libPods.a */,
 			);
 			name = Frameworks;
 			sourceTree = "<group>";
@@ -74,7 +92,15 @@
 			children = (
 				30CAA0EF1552CA980010293B /* JMAppDelegate.h */,
 				30CAA0F01552CA980010293B /* JMAppDelegate.m */,
+				30BD9BDE1553077A006B103A /* DemoTableViewController.h */,
+				30BD9BDF1553077A006B103A /* DemoTableViewController.m */,
 				30CAA0E71552CA980010293B /* Supporting Files */,
+				30CAA0F71552CABF0010293B /* JMStatefulTableViewController.h */,
+				30CAA0F81552CABF0010293B /* JMStatefulTableViewController.m */,
+				30CAA1051552CBD40010293B /* JMStatefulTableViewEmptyView.h */,
+				30CAA1061552CBD40010293B /* JMStatefulTableViewEmptyView.m */,
+				30CAA1091552CC0B0010293B /* JMStatefulTableViewLoadingView.h */,
+				30CAA10A1552CC0B0010293B /* JMStatefulTableViewLoadingView.m */,
 			);
 			path = JMStatefulTableViewControllerDemo;
 			sourceTree = "<group>";
@@ -100,6 +126,7 @@
 				30CAA0D81552CA980010293B /* Sources */,
 				30CAA0D91552CA980010293B /* Frameworks */,
 				30CAA0DA1552CA980010293B /* Resources */,
+				72BA84FB7A6C4869992B1394 /* Copy Pods Resources */,
 			);
 			buildRules = (
 			);
@@ -148,6 +175,23 @@
 		};
 /* End PBXResourcesBuildPhase section */
 
+/* Begin PBXShellScriptBuildPhase section */
+		72BA84FB7A6C4869992B1394 /* Copy Pods Resources */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+			);
+			name = "Copy Pods Resources";
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "\"${SRCROOT}/Pods/Pods-resources.sh\"\n";
+		};
+/* End PBXShellScriptBuildPhase section */
+
 /* Begin PBXSourcesBuildPhase section */
 		30CAA0D81552CA980010293B /* Sources */ = {
 			isa = PBXSourcesBuildPhase;
@@ -155,6 +199,10 @@
 			files = (
 				30CAA0ED1552CA980010293B /* main.m in Sources */,
 				30CAA0F11552CA980010293B /* JMAppDelegate.m in Sources */,
+				30CAA0F91552CABF0010293B /* JMStatefulTableViewController.m in Sources */,
+				30CAA1071552CBD40010293B /* JMStatefulTableViewEmptyView.m in Sources */,
+				30CAA10B1552CC0B0010293B /* JMStatefulTableViewLoadingView.m in Sources */,
+				30BD9BE01553077A006B103A /* DemoTableViewController.m in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -217,22 +265,30 @@
 		};
 		30CAA0F51552CA980010293B /* Debug */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6CF65DC10EE494FA0570F0C /* Pods.xcconfig */;
 			buildSettings = {
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Debug;
 		};
 		30CAA0F61552CA980010293B /* Release */ = {
 			isa = XCBuildConfiguration;
+			baseConfigurationReference = E6CF65DC10EE494FA0570F0C /* Pods.xcconfig */;
 			buildSettings = {
+				DSTROOT = /tmp/xcodeproj.dst;
 				GCC_PRECOMPILE_PREFIX_HEADER = YES;
 				GCC_PREFIX_HEADER = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Prefix.pch";
+				GCC_VERSION = com.apple.compilers.llvm.clang.1_0;
 				INFOPLIST_FILE = "JMStatefulTableViewControllerDemo/JMStatefulTableViewControllerDemo-Info.plist";
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				SKIP_INSTALL = YES;
 				WRAPPER_EXTENSION = app;
 			};
 			name = Release;
@@ -256,6 +312,7 @@
 				30CAA0F61552CA980010293B /* Release */,
 			);
 			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
 		};
 /* End XCConfigurationList section */
 	};
