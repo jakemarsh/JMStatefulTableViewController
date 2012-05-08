@@ -27,7 +27,7 @@ typedef enum {
 @required
 - (void) statefulTableViewControllerWillBeginInitialLoading:(JMStatefulTableViewController *)vc completionBlock:(void (^)())success failure:(void (^)(NSError *error))failure;
 
-- (void) statefulTableViewControllerWillBeginLoadingFromPullToRefresh:(JMStatefulTableViewController *)vc completionBlock:(void (^)(NSArray *indexPaths))success failure:(void (^)(NSError *error))failure;
+- (void) statefulTableViewControllerWillBeginLoadingFromPullToRefresh:(JMStatefulTableViewController *)vc completionBlock:(void (^)(NSArray *indexPathsToInsert))success failure:(void (^)(NSError *error))failure;
 
 - (void) statefulTableViewControllerWillBeginLoadingNextPage:(JMStatefulTableViewController *)vc completionBlock:(void (^)())success failure:(void (^)(NSError *error))failure;
 - (BOOL) statefulTableViewControllerShouldBeginLoadingNextPage:(JMStatefulTableViewController *)vc;
@@ -45,8 +45,6 @@ typedef enum {
 
 @property (nonatomic, retain) JMStatefulTableViewEmptyView *emptyView;
 @property (nonatomic, retain) JMStatefulTableViewLoadingView *loadingView;
-
-@property (nonatomic, assign) NSUInteger hasLoadedLastPage;
 
 @property (nonatomic, assign) id <JMStatefulTableViewControllerDelegate> statefulDelegate;
 

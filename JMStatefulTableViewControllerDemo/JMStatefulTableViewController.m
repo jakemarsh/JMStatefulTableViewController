@@ -56,7 +56,7 @@ static const int kLoadingCellTag = 257;
 
     [_loadingView release];
     [_emptyView release];
-
+    
     [super dealloc];
 }
 
@@ -106,16 +106,18 @@ static const int kLoadingCellTag = 257;
     self.statefulState = JMStatefulTableViewControllerStateLoadingFromPullToRefresh;
 
     [self.statefulDelegate statefulTableViewControllerWillBeginLoadingFromPullToRefresh:self completionBlock:^(NSArray *indexPaths) {
-        CGFloat totalHeights = [self _cumulativeHeightForCellsAtIndexPaths:indexPaths];
-        
-        //Offset by the height fo the pull to refresh view when it's expanded:                
-        [self.tableView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
-        [self.tableView reloadData];
+        if([indexPaths count] > 0) {
+            CGFloat totalHeights = [self _cumulativeHeightForCellsAtIndexPaths:indexPaths];
 
-        if(self.tableView.contentOffset.y == 0) {
-            self.tableView.contentOffset = CGPointMake(0, (self.tableView.contentOffset.y + totalHeights) - 60.0);
-        } else {
-            self.tableView.contentOffset = CGPointMake(0, (self.tableView.contentOffset.y + totalHeights));
+            //Offset by the height fo the pull to refresh view when it's expanded:
+            [self.tableView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+            [self.tableView reloadData];
+
+            if(self.tableView.contentOffset.y == 0) {
+                self.tableView.contentOffset = CGPointMake(0, (self.tableView.contentOffset.y + totalHeights) - 60.0);
+            } else {
+                self.tableView.contentOffset = CGPointMake(0, (self.tableView.contentOffset.y + totalHeights));
+            }
         }
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
@@ -174,6 +176,8 @@ static const int kLoadingCellTag = 257;
     return numberOfRows;
 }
 - (CGFloat) _cumulativeHeightForCellsAtIndexPaths:(NSArray *)indexPaths {
+    if(!indexPaths) return 0.0;
+
     CGFloat totalHeight = 0.0;
 
     for(NSIndexPath *indexPath in indexPaths) {
@@ -246,12 +250,6 @@ static const int kLoadingCellTag = 257;
 
 - (void) viewDidLoad {
     [super viewDidLoad];
-
-    // Uncomment the following line to preserve selection between presentations.
-    // self.clearsSelectionOnViewWillAppear = NO;
- 
-    // Uncomment the following line to display an Edit button in the navigation bar for this view controller.
-    // self.navigationItem.rightBarButtonItem = self.editButtonItem;
 }
 - (void) viewDidUnload {
     [super viewDidUnload];
@@ -326,7 +324,7 @@ static const int kLoadingCellTag = 257;
     NSAssert(NO, @"statefulTableViewControllerWillBeginInitialLoading:completionBlock:failure: is meant to be implementd by it's subclasses!");
 }
 
-- (void) statefulTableViewControllerWillBeginLoadingFromPullToRefresh:(JMStatefulTableViewController *)vc completionBlock:(void (^)(NSArray *indexPaths))success failure:(void (^)(NSError *error))failure {
+- (void) statefulTableViewControllerWillBeginLoadingFromPullToRefresh:(JMStatefulTableViewController *)vc completionBlock:(void (^)(NSArray *indexPathsToInsert))success failure:(void (^)(NSError *error))failure {
     NSAssert(NO, @"statefulTableViewControllerWillBeginLoadingFromPullToRefresh:completionBlock:failure: is meant to be implementd by it's subclasses!");
 }
 

@@ -1,0 +1,4 @@
+platform :ios
+
+dependency 'SVPullToRefresh'
+
