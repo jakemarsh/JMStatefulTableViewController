@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
   s.authors 	= { 'Jake Marsh' => 'jake@deallocatedobjects.com' }
   s.source 		= { :git => 'git://github.com/jakemarsh/JMStatefulTableViewController.git', :tag => '0.0.1' }
 
-  s.platforms 'iOS'
+  s.platform  = :ios
   s.sdk '>= 5.0'
 
   s.doc_bin 'appledoc'
