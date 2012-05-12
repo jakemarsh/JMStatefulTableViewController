@@ -8,12 +8,8 @@ Pod::Spec.new do |s|
   s.source 		= { :git => 'git://github.com/jakemarsh/JMStatefulTableViewController.git', :tag => '0.0.1' }
 
   s.platform  = :ios
-  s.sdk '>= 5.0'
 
-  s.doc_bin 'appledoc'
-  s.doc_options '--project-name' => 'JMStatefulTableViewController', '--project-company' => 'Jake Marsh', '--company-id' => 'com.rubberducksoft'
-
-  s.source_files ['JMStatefulTableViewControllerDemo/JMStatefulTableViewController.*', 'JMStatefulTableViewControllerDemo/JMStatefulTableViewEmptyView.*', 'JMStatefulTableViewControllerDemo/JMStatefulTableViewLoadingView.*']
+  s.source_files = ['JMStatefulTableViewControllerDemo/JMStatefulTableViewController.*', 'JMStatefulTableViewControllerDemo/JMStatefulTableViewEmptyView.*', 'JMStatefulTableViewControllerDemo/JMStatefulTableViewLoadingView.*']
 
 	s.dependency 'SVPullToRefresh'
 end
