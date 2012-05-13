@@ -37,6 +37,10 @@ typedef enum {
 
 - (UITableViewCell *) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
 
+@optional
+- (void) statefulTableViewControllerWillBeginLoading:(JMStatefulTableViewController *)vc;
+- (void) statefulTableViewControllerDidFinishLoading:(JMStatefulTableViewController *)vc;
+
 @end
 
 @interface JMStatefulTableViewController : UITableViewController <JMStatefulTableViewControllerDelegate>
@@ -47,5 +51,7 @@ typedef enum {
 @property (nonatomic, retain) JMStatefulTableViewLoadingView *loadingView;
 
 @property (nonatomic, assign) id <JMStatefulTableViewControllerDelegate> statefulDelegate;
+
+- (void) loadNewer;
 
 @end

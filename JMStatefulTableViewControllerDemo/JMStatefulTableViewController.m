@@ -62,10 +62,18 @@ static const int kLoadingCellTag = 257;
 
 #pragma mark - Loading Methods
 
+- (void) loadNewer {
+    [self _loadFromPullToRefresh];
+}
+
 - (void) _loadFirstPage {
     if(self.statefulState == JMStatefulTableViewControllerStateInitialLoading) return;
 
     self.statefulState = JMStatefulTableViewControllerStateInitialLoading;
+
+    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
+        [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
+    }    
 
     [self.statefulDelegate statefulTableViewControllerWillBeginInitialLoading:self completionBlock:^{
         [self.tableView reloadData]; // We have to call reloadData before we call _totalNumberOfRows otherwise the new count (after loading) won't be accurately reflected.
@@ -75,8 +83,16 @@ static const int kLoadingCellTag = 257;
         } else {
             self.statefulState = JMStatefulTableViewControllerStateEmpty;
         }
+
+        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
+            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
+        }
     } failure:^(NSError *error) {
         self.statefulState = JMStatefulTableViewControllerErrorWhileInitiallyLoading;
+
+        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
+            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
+        }
     }];
 }
 - (void) _loadNextPage {
@@ -85,6 +101,10 @@ static const int kLoadingCellTag = 257;
     if([self.statefulDelegate statefulTableViewControllerShouldBeginLoadingNextPage:self]) {
         self.statefulState = JMStatefulTableViewControllerStateLoadingNextPage;
 
+        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
+            [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
+        }    
+        
         [self.statefulDelegate statefulTableViewControllerWillBeginLoadingNextPage:self completionBlock:^{
             [self.tableView reloadData];
 
@@ -93,9 +113,17 @@ static const int kLoadingCellTag = 257;
             } else {
                 self.statefulState = JMStatefulTableViewControllerStateEmpty;
             }
+
+            if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
+                [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
+            }
         } failure:^(NSError *error) {
             //TODO What should we do here?
             self.statefulState = JMStatefulTableViewControllerStateIdle;
+
+            if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
+                [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
+            }
         }];
     }
 }
@@ -104,6 +132,10 @@ static const int kLoadingCellTag = 257;
     if(self.statefulState == JMStatefulTableViewControllerStateLoadingFromPullToRefresh) return;
 
     self.statefulState = JMStatefulTableViewControllerStateLoadingFromPullToRefresh;
+
+    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
+        [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
+    }    
 
     [self.statefulDelegate statefulTableViewControllerWillBeginLoadingFromPullToRefresh:self completionBlock:^(NSArray *indexPaths) {
         if([indexPaths count] > 0) {
@@ -122,11 +154,19 @@ static const int kLoadingCellTag = 257;
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
         [self.tableView.pullToRefreshView stopAnimating];
+
+        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
+            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
+        }
     } failure:^(NSError *error) {
         //TODO: What should we do here?
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
         [self.tableView.pullToRefreshView stopAnimating];
+
+        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
+            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
+        }
     }];
 }
 
