@@ -63,11 +63,15 @@ static const int kLoadingCellTag = 257;
 #pragma mark - Loading Methods
 
 - (void) loadNewer {
-    [self _loadFromPullToRefresh];
+    if([self _totalNumberOfRows] == 0) {
+        [self _loadFirstPage];
+    } else {
+        [self _loadFromPullToRefresh];
+    }
 }
 
 - (void) _loadFirstPage {
-    if(self.statefulState == JMStatefulTableViewControllerStateInitialLoading) return;
+    if(self.statefulState == JMStatefulTableViewControllerStateInitialLoading || [self _totalNumberOfRows] > 0) return;
 
     self.statefulState = JMStatefulTableViewControllerStateInitialLoading;
 
