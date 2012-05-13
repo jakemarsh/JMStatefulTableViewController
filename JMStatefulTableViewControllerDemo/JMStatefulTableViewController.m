@@ -275,8 +275,6 @@ static const int kLoadingCellTag = 257;
 }
 
 - (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSLog(@"statefulState = %d", self.statefulState);
-
     NSInteger rows = [self.statefulDelegate statefulTableViewController:self tableView:tableView numberOfRowsInSection:section];
 
     if(!self.isCountingRows) {
