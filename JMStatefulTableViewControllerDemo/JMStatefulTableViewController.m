@@ -75,6 +75,8 @@ static const int kLoadingCellTag = 257;
 
     self.statefulState = JMStatefulTableViewControllerStateInitialLoading;
 
+    [self.tableView reloadData];
+
     if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
         [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
     }    
@@ -286,10 +288,6 @@ static const int kLoadingCellTag = 257;
 
     self.emptyView = [[[JMStatefulTableViewEmptyView alloc] initWithFrame:self.tableView.bounds] autorelease];
     self.emptyView.backgroundColor = [UIColor yellowColor];
-
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [self _loadFromPullToRefresh];
-    }];
 }
 
 - (void) viewDidLoad {
@@ -304,6 +302,10 @@ static const int kLoadingCellTag = 257;
 
 - (void) viewWillAppear:(BOOL)animated {
     [self _loadFirstPage];
+
+    [self.tableView addPullToRefreshWithActionHandler:^{
+        [self _loadFromPullToRefresh];
+    }];
 
     [super viewWillAppear:animated];
 }

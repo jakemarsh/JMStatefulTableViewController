@@ -47,8 +47,8 @@ typedef enum {
 
 @property (nonatomic) JMStatefulTableViewControllerState statefulState;
 
-@property (nonatomic, retain) JMStatefulTableViewEmptyView *emptyView;
-@property (nonatomic, retain) JMStatefulTableViewLoadingView *loadingView;
+@property (nonatomic, retain) UIView *emptyView;
+@property (nonatomic, retain) UIView *loadingView;
 
 @property (nonatomic, assign) id <JMStatefulTableViewControllerDelegate> statefulDelegate;
 
