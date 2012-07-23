@@ -90,7 +90,7 @@ You should write or call your code to load the next set of content, and then cal
 		CatPhoto *photo = [self.catPhotos lastObject];
 		
 		// Load any older cat photos from our server
-        NSArray *catPhotos = [self _loadHilariousCatPhotosFromTheInternetNewerThanPhoto:photo];
+        NSArray *catPhotos = [self _loadHilariousCatPhotosFromTheInternetOlderThanPhoto:photo];
 
 		// Append the new photos we've loaded to the end of your self.catPhotos array
 		self.catPhotos = [self.catPhotos arrayByAddingObjectsFromArray:catPhotos];
