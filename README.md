@@ -90,7 +90,7 @@ You should write or call your code to load the next set of content, and then cal
 		CatPhoto *photo = [self.catPhotos lastObject];
 		
 		// Load any older cat photos from our server
-        NSArray *catPhotos = [self _loadHilariousCatPhotosFromTheInternetNewerThanPhoto:photo];
+        NSArray *catPhotos = [self _loadHilariousCatPhotosFromTheInternetOlderThanPhoto:photo];
 
 		// Append the new photos we've loaded to the end of your self.catPhotos array
 		self.catPhotos = [self.catPhotos arrayByAddingObjectsFromArray:catPhotos];
@@ -155,5 +155,7 @@ Now run `pod install` to install the dependency.
     $ git submodule add https://github.com/jakemarsh/JMStatefulTableViewController.git Vendor/JMStatefulTableViewController
 
 Add all of the Objective-C files to your project.
+
+If you're installing this way, (instead of using CocoaPods) you'll also need to separately install [SVPullToRefresh](https://github.com/samvermette/SVPullToRefresh) on your own, as described in the [SVPullToRefresh README](https://github.com/samvermette/SVPullToRefresh#readme). (For this reason, and because it's an awesome system, I strongly reccomend using CocoaPods).
 
 `JMStatefulTableViewController` uses [Automatic Reference Counting (ARC)](http://clang.llvm.org/docs/AutomaticReferenceCounting.html). If your project doesn't use ARC, you will need to set the `-fobjc-arc` compiler flag on all of the SSPullToRefresh source files. To do this in Xcode, go to your active target and select the "Build Phases" tab. In the "Compiler Flags" column, set `-fobjc-arc` for each of the `JMStatefulTableViewController` source files.
