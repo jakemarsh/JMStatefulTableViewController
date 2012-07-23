@@ -11,6 +11,13 @@ This is the class I use whenever I need to implement a "stateful" table view in 
 
 If you're using `JMStatefulTableViewController` in your application, add it to [the list](https://github.com/jakemarsh/JMStatefulTableViewController/wiki/Applications).
 
+## Screenshots
+
+<center>
+<img src="http://cl.ly/IHVb/iOS%20Simulator%20Screen%20shot%20Jul%2023,%202012%2012.42.19%20PM.png" width="320" title="Pull to Refresh" />
+&nbsp;&nbsp;&nbsp;<img src="http://cl.ly/IGtN/iOS%20Simulator%20Screen%20shot%20Jul%2023,%202012%2012.42.22%20PM.png" width="320" title="Infinte Scrolling" />
+</center>
+
 ## Example Usage
 
 The demo project hosted in this repo is the first place you should look for how to implement `JMStatefulTableViewController` in your app, but basically you just need to subclass `JMStatefulTableViewController` and implement the required delegate methods on that subclass.
@@ -139,7 +146,7 @@ You can set these to any `UIView` you'd like, to indicate any of these states. L
 
 ### With CocoaPods
 
-If you are using [CocoaPods](http://cocoapods.org) than just add next line to your `Podfile`:
+If you are using [CocoaPods](http://cocoapods.org) then just add this line to your `Podfile`:
 
 ``` ruby
 pod 'JMStatefulTableViewController'
