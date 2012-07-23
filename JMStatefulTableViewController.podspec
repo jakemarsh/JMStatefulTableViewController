@@ -17,7 +17,7 @@ Pod::Spec.new do |s|
     :file => 'MIT-LICENSE'
   }
 
-  s.source_files = ['JMStatefulTableViewControllerDemo/JMStatefulTableViewController/*.*']
+  s.source_files = ['JMStatefulTableViewController/*.*']
 
   s.dependency 'SVPullToRefresh'  
 end
