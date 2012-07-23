@@ -7,7 +7,7 @@ Pod::Spec.new do |s|
 
   s.homepage  = 'https://github.com/jakemarsh/JMStatefulTableViewController'
   s.authors   = { 'Jake Marsh' => 'jake@deallocatedobjects.com' }
-  s.source    = { :git => 'git://github.com/jakemarsh/JMStatefulTableViewController.git', :tag => '0.1.0' }
+  s.source   = { :git => 'https://github.com/jakemarsh/JMStatefulTableViewController.git', :tag => '0.1.0' }
 
   s.platform  = :ios
   s.requires_arc = true
