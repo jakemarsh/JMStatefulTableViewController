@@ -3,14 +3,15 @@
 //  JMStatefulTableViewControllerDemo
 //
 //  Created by Jake Marsh on 5/3/12.
-//  Copyright (c) 2012 Rubber Duck Software. All rights reserved.
+//  Copyright (c) 2012 Jake Marsh. All rights reserved.
 //
 
 #import "DemoTableViewController.h"
 
 @interface DemoTableViewController ()
 
-@property (nonatomic, retain) NSArray *beers;
+@property (nonatomic) NSArray *beers;
+
 - (NSArray *) _twentyRandomBeerStrings;
 
 @end
@@ -28,6 +29,8 @@
     return self;
 }
 
+#pragma mark - Private Methods
+
 - (NSArray *) _twentyRandomBeerStrings {
     return [NSArray arrayWithObjects:@"Budweiser", @"Iron City", @"Amstel Light", @"Red Stripe", @"Smithwicks", @"Foster’s", @"Victory", @"Corona", @"Ommegang", @"Chimay", @"Stella Artois", @"Paulaner", @"Newcastle", @"Samuel Adams", @"Rogue", @"Sam Smith’s", @"Yuengling", @"Guinness", @"Sierra Nevada", @"Westvleteren", nil];
 }
@@ -37,13 +40,36 @@
 - (void) viewDidLoad {
     [super viewDidLoad];
 }
-
-- (void) viewDidUnload {
-    [super viewDidUnload];
+- (void) didReceiveMemoryWarning {
+    
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation != UIInterfaceOrientationPortraitUpsideDown);
+}
+
+#pragma mark - UITableViewDataSource
+
+- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
+    return 1;
+}
+- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
+    return self.beers.count;
+}
+
+- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
+    static NSString *CellIdentifier = @"BeerCell";
+    
+    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
+    if(!cell) {
+        cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier];
+    }
+    
+    NSString *beer = [self.beers objectAtIndex:indexPath.row];
+    
+    cell.textLabel.text = beer;
+    
+    return cell;
 }
 
 #pragma mark - UITableViewDelegate
@@ -97,30 +123,9 @@
         });
     });    
 }
+
 - (BOOL) statefulTableViewControllerShouldBeginLoadingNextPage:(JMStatefulTableViewController *)vc {
     return self.beers.count <= 100;
-}
-
-- (NSInteger) statefulTableViewController:(JMStatefulTableViewController *)vc numberOfSectionsInTableView:(UITableView *)tableView {
-    return 1;
-}
-- (NSInteger) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    return self.beers.count;
-}
-
-- (UITableViewCell *) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    static NSString *CellIdentifier = @"BeerCell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(!cell) {
-        cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-    }
-
-    NSString *beer = [self.beers objectAtIndex:indexPath.row];
-
-    cell.textLabel.text = beer;
-
-    return cell;
 }
 
 @end

@@ -3,12 +3,13 @@
 //  JMStatefulTableViewControllerDemo
 //
 //  Created by Jake Marsh on 5/3/12.
-//  Copyright (c) 2012 Rubber Duck Software. All rights reserved.
+//  Copyright (c) 2012 Jake Marsh. All rights reserved.
 //
 
 #import <UIKit/UIKit.h>
 #import "JMStatefulTableViewLoadingView.h"
 #import "JMStatefulTableViewEmptyView.h"
+#import "JMStatefulTableViewErrorView.h"
 #import "SVPullToRefresh.h"
 
 typedef enum {
@@ -17,7 +18,7 @@ typedef enum {
 	JMStatefulTableViewControllerStateLoadingFromPullToRefresh = 2,
 	JMStatefulTableViewControllerStateLoadingNextPage = 3,
 	JMStatefulTableViewControllerStateEmpty = 4,
-	JMStatefulTableViewControllerErrorWhileInitiallyLoading = 5,
+	JMStatefulTableViewControllerError = 5,
 } JMStatefulTableViewControllerState;
 
 @class JMStatefulTableViewController;
@@ -27,19 +28,18 @@ typedef enum {
 @required
 - (void) statefulTableViewControllerWillBeginInitialLoading:(JMStatefulTableViewController *)vc completionBlock:(void (^)())success failure:(void (^)(NSError *error))failure;
 
+@required
 - (void) statefulTableViewControllerWillBeginLoadingFromPullToRefresh:(JMStatefulTableViewController *)vc completionBlock:(void (^)(NSArray *indexPathsToInsert))success failure:(void (^)(NSError *error))failure;
 
+@required
 - (void) statefulTableViewControllerWillBeginLoadingNextPage:(JMStatefulTableViewController *)vc completionBlock:(void (^)())success failure:(void (^)(NSError *error))failure;
+
+@required
 - (BOOL) statefulTableViewControllerShouldBeginLoadingNextPage:(JMStatefulTableViewController *)vc;
 
-- (NSInteger) statefulTableViewController:(JMStatefulTableViewController *)vc numberOfSectionsInTableView:(UITableView *)tableView;
-- (NSInteger) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section;
-
-- (UITableViewCell *) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath;
-
 @optional
-- (void) statefulTableViewControllerWillBeginLoading:(JMStatefulTableViewController *)vc;
-- (void) statefulTableViewControllerDidFinishLoading:(JMStatefulTableViewController *)vc;
+- (void) statefulTableViewController:(JMStatefulTableViewController *)vc willTransitionToState:(JMStatefulTableViewControllerState)state;
+- (void) statefulTableViewController:(JMStatefulTableViewController *)vc didTransitionToState:(JMStatefulTableViewControllerState)state;
 
 @end
 
@@ -47,10 +47,11 @@ typedef enum {
 
 @property (nonatomic) JMStatefulTableViewControllerState statefulState;
 
-@property (nonatomic, retain) UIView *emptyView;
-@property (nonatomic, retain) UIView *loadingView;
+@property (strong, nonatomic) UIView *emptyView;
+@property (strong, nonatomic) UIView *loadingView;
+@property (strong, nonatomic) UIView *errorView;
 
-@property (nonatomic, assign) id <JMStatefulTableViewControllerDelegate> statefulDelegate;
+@property (nonatomic, unsafe_unretained) id <JMStatefulTableViewControllerDelegate> statefulDelegate;
 
 - (void) loadNewer;
 

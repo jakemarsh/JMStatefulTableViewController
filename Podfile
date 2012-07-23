@@ -1,4 +1,3 @@
 platform :ios
 
-dependency 'SVPullToRefresh'
-
+pod 'SVPullToRefresh'

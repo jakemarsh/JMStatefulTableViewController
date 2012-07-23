@@ -3,24 +3,19 @@
 //  JMStatefulTableViewControllerDemo
 //
 //  Created by Jake Marsh on 5/3/12.
-//  Copyright (c) 2012 Rubber Duck Software. All rights reserved.
+//  Copyright (c) 2012 Jake Marsh. All rights reserved.
 //
 
-#import "JMAppDelegate.h"
+#import "AppDelegate.h"
 #import "DemoTableViewController.h"
 
-@implementation JMAppDelegate
+@implementation AppDelegate
 
 @synthesize window = _window;
 
-- (void)dealloc
-{
-    [_window release];
-    [super dealloc];
-}
 
 - (BOOL) application:(UIApplication *)application didFinishLaunchingWithOptions:(NSDictionary *)launchOptions {
-    self.window = [[[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]] autorelease];
+    self.window = [[UIWindow alloc] initWithFrame:[[UIScreen mainScreen] bounds]];
 
     // Override point for customization after application launch.
     self.window.backgroundColor = [UIColor whiteColor];
@@ -30,7 +25,6 @@
 
     self.window.rootViewController = vc;
 
-    [vc release];
 
     return YES;
 }

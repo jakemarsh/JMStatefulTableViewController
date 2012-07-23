@@ -3,7 +3,7 @@
 //  JMStatefulTableViewControllerDemo
 //
 //  Created by Jake Marsh on 5/3/12.
-//  Copyright (c) 2012 Rubber Duck Software. All rights reserved.
+//  Copyright (c) 2012 Jake Marsh. All rights reserved.
 //
 
 #import "JMStatefulTableViewController.h"
@@ -37,6 +37,7 @@ static const int kLoadingCellTag = 257;
 
 @synthesize loadingView = _loadingView;
 @synthesize emptyView = _emptyView;
+@synthesize errorView = _errorView;
 
 @synthesize statefulDelegate = _statefulDelegate;
 
@@ -54,10 +55,7 @@ static const int kLoadingCellTag = 257;
 - (void) dealloc {
     self.statefulDelegate = nil;
 
-    [_loadingView release];
-    [_emptyView release];
     
-    [super dealloc];
 }
 
 #pragma mark - Loading Methods
@@ -77,10 +75,6 @@ static const int kLoadingCellTag = 257;
 
     [self.tableView reloadData];
 
-    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
-        [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
-    }    
-
     [self.statefulDelegate statefulTableViewControllerWillBeginInitialLoading:self completionBlock:^{
         [self.tableView reloadData]; // We have to call reloadData before we call _totalNumberOfRows otherwise the new count (after loading) won't be accurately reflected.
 
@@ -89,48 +83,36 @@ static const int kLoadingCellTag = 257;
         } else {
             self.statefulState = JMStatefulTableViewControllerStateEmpty;
         }
-
-        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
-            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
-        }
     } failure:^(NSError *error) {
-        self.statefulState = JMStatefulTableViewControllerErrorWhileInitiallyLoading;
-
-        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
-            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
-        }
+        self.statefulState = JMStatefulTableViewControllerError;
     }];
 }
 - (void) _loadNextPage {
     if(self.statefulState == JMStatefulTableViewControllerStateLoadingNextPage) return;
 
     if([self.statefulDelegate statefulTableViewControllerShouldBeginLoadingNextPage:self]) {
+        self.tableView.showsInfiniteScrolling = YES;
+
         self.statefulState = JMStatefulTableViewControllerStateLoadingNextPage;
 
-        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
-            [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
-        }    
-        
         [self.statefulDelegate statefulTableViewControllerWillBeginLoadingNextPage:self completionBlock:^{
             [self.tableView reloadData];
+
+            if(![self.statefulDelegate statefulTableViewControllerShouldBeginLoadingNextPage:self]) {
+                self.tableView.showsInfiniteScrolling = NO;
+            };
 
             if([self _totalNumberOfRows] > 0) {
                 self.statefulState = JMStatefulTableViewControllerStateIdle;
             } else {
                 self.statefulState = JMStatefulTableViewControllerStateEmpty;
             }
-
-            if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
-                [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
-            }
         } failure:^(NSError *error) {
             //TODO What should we do here?
             self.statefulState = JMStatefulTableViewControllerStateIdle;
-
-            if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
-                [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
-            }
         }];
+    } else {
+        self.tableView.showsInfiniteScrolling = NO;
     }
 }
 
@@ -138,10 +120,6 @@ static const int kLoadingCellTag = 257;
     if(self.statefulState == JMStatefulTableViewControllerStateLoadingFromPullToRefresh) return;
 
     self.statefulState = JMStatefulTableViewControllerStateLoadingFromPullToRefresh;
-
-    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerWillBeginLoading:)]) {
-        [self.statefulDelegate statefulTableViewControllerWillBeginLoading:self];
-    }    
 
     [self.statefulDelegate statefulTableViewControllerWillBeginLoadingFromPullToRefresh:self completionBlock:^(NSArray *indexPaths) {
         if([indexPaths count] > 0) {
@@ -160,31 +138,22 @@ static const int kLoadingCellTag = 257;
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
         [self.tableView.pullToRefreshView stopAnimating];
-
-        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
-            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
-        }
     } failure:^(NSError *error) {
         //TODO: What should we do here?
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
         [self.tableView.pullToRefreshView stopAnimating];
-
-        if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerDidFinishLoading:)]) {
-            [self.statefulDelegate statefulTableViewControllerDidFinishLoading:self];
-        }
     }];
 }
 
 #pragma mark - Table View Cells & NSIndexPaths
 
 - (UITableViewCell *) _cellForLoadingCell {
-    UITableViewCell *cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil] autorelease];
+    UITableViewCell *cell = [[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:nil];
 
     UIActivityIndicatorView *activityIndicator = [[UIActivityIndicatorView alloc] initWithActivityIndicatorStyle:UIActivityIndicatorViewStyleGray];
     activityIndicator.center = cell.center;
     [cell addSubview:activityIndicator];
-    [activityIndicator release];
 
     [activityIndicator startAnimating];
 
@@ -236,6 +205,10 @@ static const int kLoadingCellTag = 257;
 #pragma mark - Setter Overrides
 
 - (void) setStatefulState:(JMStatefulTableViewControllerState)statefulState {
+    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewController:willTransitionToState:)]) {
+        [self.statefulDelegate statefulTableViewController:self willTransitionToState:statefulState];
+    }
+
 	_statefulState = statefulState;
 
     switch (_statefulState) {
@@ -268,13 +241,19 @@ static const int kLoadingCellTag = 257;
             // TODO
             break;
             
-        case JMStatefulTableViewControllerErrorWhileInitiallyLoading:
-            // TODO
+        case JMStatefulTableViewControllerError:
+            self.tableView.backgroundView = self.errorView;
+            self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
+            self.tableView.scrollEnabled = NO;
             [self.tableView reloadData];
             break;
 
         default:
             break;
+    }
+
+    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewController:didTransitionToState:)]) {
+        [self.statefulDelegate statefulTableViewController:self didTransitionToState:statefulState];
     }
 }
 
@@ -283,11 +262,14 @@ static const int kLoadingCellTag = 257;
 - (void) loadView {
     [super loadView];
 
-    self.loadingView = [[[JMStatefulTableViewLoadingView alloc] initWithFrame:self.tableView.bounds] autorelease];
+    self.loadingView = [[JMStatefulTableViewLoadingView alloc] initWithFrame:self.tableView.bounds];
     self.loadingView.backgroundColor = [UIColor greenColor];
 
-    self.emptyView = [[[JMStatefulTableViewEmptyView alloc] initWithFrame:self.tableView.bounds] autorelease];
+    self.emptyView = [[JMStatefulTableViewEmptyView alloc] initWithFrame:self.tableView.bounds];
     self.emptyView.backgroundColor = [UIColor yellowColor];
+
+    self.errorView = [[JMStatefulTableViewErrorView alloc] initWithFrame:self.tableView.bounds];
+    self.errorView.backgroundColor = [UIColor redColor];
 }
 
 - (void) viewDidLoad {
@@ -303,8 +285,14 @@ static const int kLoadingCellTag = 257;
 - (void) viewWillAppear:(BOOL)animated {
     [self _loadFirstPage];
 
+    __weak JMStatefulTableViewController *weakSelf = self;
+
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [self _loadFromPullToRefresh];
+        [weakSelf _loadFromPullToRefresh];
+    }];
+    
+    [self.tableView addInfiniteScrollingWithActionHandler:^{
+        [weakSelf _loadNextPage];
     }];
 
     [super viewWillAppear:animated];
@@ -312,54 +300,6 @@ static const int kLoadingCellTag = 257;
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {
     return (interfaceOrientation == UIInterfaceOrientationPortrait);
-}
-
-#pragma mark - Table view data source
-
-- (NSInteger) numberOfSectionsInTableView:(UITableView *)tableView {
-    return [self.statefulDelegate statefulTableViewController:self numberOfSectionsInTableView:tableView];
-}
-
-- (NSInteger) tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSInteger rows = [self.statefulDelegate statefulTableViewController:self tableView:tableView numberOfRowsInSection:section];
-
-    if(!self.isCountingRows) {
-        if([self _indexRepresentsLastSection:section] && self.statefulState != JMStatefulTableViewControllerStateInitialLoading && [self.statefulDelegate statefulTableViewControllerShouldBeginLoadingNextPage:self]) {
-            rows++;
-        }
-    }
-
-    return rows;
-}
-
-- (UITableViewCell *) tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    if([self _indexPathRepresentsLastRow:indexPath] && [self.statefulDelegate statefulTableViewControllerShouldBeginLoadingNextPage:self]) {
-        return [self _cellForLoadingCell];
-    } else {
-        return [self.statefulDelegate statefulTableViewController:self tableView:self.tableView cellForRowAtIndexPath:indexPath];
-    }
-
-    static NSString *CellIdentifier = @"Cell";
-
-    UITableViewCell *cell = [tableView dequeueReusableCellWithIdentifier:CellIdentifier];
-    if(!cell) cell = [[[UITableViewCell alloc] initWithStyle:UITableViewCellStyleDefault reuseIdentifier:CellIdentifier] autorelease];
-
-    // Configure the cell...
-
-    cell.textLabel.text = [NSString stringWithFormat:@"Section %d, Row %d", indexPath.section, indexPath.row];
-
-    return cell;
-}
-- (void) tableView:(UITableView *)tableView willDisplayCell:(UITableViewCell *)cell forRowAtIndexPath:(NSIndexPath *)indexPath {
-    if(cell.tag == kLoadingCellTag && [self.statefulDelegate statefulTableViewControllerShouldBeginLoadingNextPage:self]) {
-        [self _loadNextPage];
-    }
-}
-
-#pragma mark - Table view delegate
-
-- (void) tableView:(UITableView *)tableView didSelectRowAtIndexPath:(NSIndexPath *)indexPath {
-
 }
 
 #pragma mark - JMStatefulTableViewControllerDelegate
@@ -379,23 +319,6 @@ static const int kLoadingCellTag = 257;
     NSAssert(NO, @"statefulTableViewControllerShouldBeginLoadingNextPage is meant to be implementd by it's subclasses!");    
 
     return NO;
-}
-
-- (NSInteger) statefulTableViewController:(JMStatefulTableViewController *)vc numberOfSectionsInTableView:(UITableView *)tableView {
-    NSAssert(NO, @"statefulTableViewController:numberOfSectionsInTableView: is meant to be implementd by it's subclasses!");
-    
-    return 0;
-}
-- (NSInteger) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView numberOfRowsInSection:(NSInteger)section {
-    NSAssert(NO, @"statefulTableViewController:tableView:numberOfRowsInSection: is meant to be implementd by it's subclasses!");
-
-    return 0;
-}
-
-- (UITableViewCell *) statefulTableViewController:(JMStatefulTableViewController *)vc tableView:(UITableView *)tableView cellForRowAtIndexPath:(NSIndexPath *)indexPath {
-    NSAssert(NO, @"statefulTableViewController:tableView:cellForRowAtIndexPath: is meant to be implementd by it's subclasses!");
-
-    return nil;
 }
 
 @end

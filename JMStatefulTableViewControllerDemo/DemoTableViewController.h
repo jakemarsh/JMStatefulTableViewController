@@ -3,7 +3,7 @@
 //  JMStatefulTableViewControllerDemo
 //
 //  Created by Jake Marsh on 5/3/12.
-//  Copyright (c) 2012 Rubber Duck Software. All rights reserved.
+//  Copyright (c) 2012 Jake Marsh. All rights reserved.
 //
 
 #import "JMStatefulTableViewController.h"
