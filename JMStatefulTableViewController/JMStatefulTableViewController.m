@@ -285,14 +285,14 @@ static const int kLoadingCellTag = 257;
 - (void) viewWillAppear:(BOOL)animated {
     [self _loadFirstPage];
 
-    __block JMStatefulTableViewController *blockSelf = self;
+    __weak JMStatefulTableViewController *weakSelf = self;
 
     [self.tableView addPullToRefreshWithActionHandler:^{
-        [blockSelf _loadFromPullToRefresh];
+        [weakSelf _loadFromPullToRefresh];
     }];
     
     [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [blockSelf _loadNextPage];
+        [weakSelf _loadNextPage];
     }];
 
     [super viewWillAppear:animated];
