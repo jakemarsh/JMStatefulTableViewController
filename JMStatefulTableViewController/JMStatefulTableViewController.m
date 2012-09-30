@@ -8,6 +8,13 @@
 
 #import "JMStatefulTableViewController.h"
 
+@interface SVPullToRefresh ()
+
+@property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
+@property (nonatomic, copy) void (^infiniteScrollingActionHandler)(void);
+
+@end
+
 static const int kLoadingCellTag = 257;
 
 @interface JMStatefulTableViewController ()
@@ -297,18 +304,18 @@ static const int kLoadingCellTag = 257;
 - (void) viewWillAppear:(BOOL)animated {
     [self _loadFirstPage];
 
-    if(!self.hasAddedPullToRefreshAndInfiniteScrollingHandlers) {
-        __block JMStatefulTableViewController *safeSelf = self;
+    __block JMStatefulTableViewController *safeSelf = self;
 
+    if(!self.tableView.pullToRefreshView.pullToRefreshActionHandler) {
         [self.tableView addPullToRefreshWithActionHandler:^{
             [safeSelf _loadFromPullToRefresh];
         }];
+    }
 
+    if(!self.tableView.infiniteScrollingView.infiniteScrollingActionHandler) {
         [self.tableView addInfiniteScrollingWithActionHandler:^{
             [safeSelf _loadNextPage];
         }];
-
-        self.hasAddedPullToRefreshAndInfiniteScrollingHandlers = YES;
     }
 
     [super viewWillAppear:animated];
