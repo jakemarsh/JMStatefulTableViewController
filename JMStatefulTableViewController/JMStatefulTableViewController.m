@@ -57,15 +57,13 @@ static const int kLoadingCellTag = 257;
     self = [super initWithStyle:style];
     if (!self) return nil;
 
-    self.statefulState = JMStatefulTableViewControllerStateIdle;
+    _statefulState = JMStatefulTableViewControllerStateIdle;
     self.statefulDelegate = self;
 
     return self;
 }
 - (void) dealloc {
     self.statefulDelegate = nil;
-
-    
 }
 
 #pragma mark - Loading Methods
