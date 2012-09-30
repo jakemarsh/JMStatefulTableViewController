@@ -46,6 +46,9 @@ typedef enum {
 @optional
 - (BOOL) statefulTableViewControllerShouldPullToRefresh:(JMStatefulTableViewController *)vc;
 
+@optional
+- (BOOL) statefulTableViewControllerShouldInfinitelyScroll:(JMStatefulTableViewController *)vc;
+
 @end
 
 @interface JMStatefulTableViewController : UITableViewController <JMStatefulTableViewControllerDelegate>

@@ -316,7 +316,12 @@ static const int kLoadingCellTag = 257;
         }];
     }
 
-    if(!self.tableView.infiniteScrollingView.infiniteScrollingActionHandler) {
+    BOOL shouldInfinitelyScroll = YES;
+    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerShouldInfinitelyScroll:)]) {
+        shouldInfinitelyScroll = [self.statefulDelegate statefulTableViewControllerShouldInfinitelyScroll:self];
+    }
+
+    if(!self.tableView.infiniteScrollingView.infiniteScrollingActionHandler && shouldInfinitelyScroll) {
         [self.tableView addInfiniteScrollingWithActionHandler:^{
             [safeSelf _loadNextPage];
         }];
