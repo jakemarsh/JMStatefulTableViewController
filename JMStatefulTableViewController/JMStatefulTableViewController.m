@@ -216,6 +216,8 @@ static const int kLoadingCellTag = 257;
             self.tableView.backgroundView = nil;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             self.tableView.scrollEnabled = YES;
+            self.tableView.tableHeaderView.hidden = NO;
+            self.tableView.tableFooterView.hidden = NO;
             [self.tableView reloadData];
 
             break;
@@ -224,6 +226,9 @@ static const int kLoadingCellTag = 257;
             self.tableView.backgroundView = self.loadingView;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             self.tableView.scrollEnabled = NO;
+            self.tableView.tableHeaderView.hidden = YES;
+            self.tableView.tableFooterView.hidden = YES;
+            [self.tableView reloadData];
 
             break;
 
@@ -231,6 +236,8 @@ static const int kLoadingCellTag = 257;
             self.tableView.backgroundView = self.emptyView;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             self.tableView.scrollEnabled = NO;
+            self.tableView.tableHeaderView.hidden = YES;
+            self.tableView.tableFooterView.hidden = YES;
             [self.tableView reloadData];
 
         case JMStatefulTableViewControllerStateLoadingNextPage:
@@ -245,6 +252,8 @@ static const int kLoadingCellTag = 257;
             self.tableView.backgroundView = self.errorView;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             self.tableView.scrollEnabled = NO;
+            self.tableView.tableHeaderView.hidden = YES;
+            self.tableView.tableFooterView.hidden = YES;
             [self.tableView reloadData];
             break;
 
