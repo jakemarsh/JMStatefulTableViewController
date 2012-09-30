@@ -13,6 +13,7 @@ static const int kLoadingCellTag = 257;
 @interface JMStatefulTableViewController ()
 
 @property (nonatomic, assign) BOOL isCountingRows;
+@property (nonatomic, assign) BOOL hasAddedPullToRefreshAndInfiniteScrollingHandlers;
 
 // Loading
 
@@ -42,6 +43,8 @@ static const int kLoadingCellTag = 257;
 @synthesize statefulDelegate = _statefulDelegate;
 
 @synthesize isCountingRows = _isCountingRows;
+
+@synthesize hasAddedPullToRefreshAndInfiniteScrollingHandlers = _hasAddedPullToRefreshAndInfiniteScrollingHandlers;
 
 - (id) initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -294,15 +297,19 @@ static const int kLoadingCellTag = 257;
 - (void) viewWillAppear:(BOOL)animated {
     [self _loadFirstPage];
 
-    __block JMStatefulTableViewController *safeSelf = self;
+    if(!self.hasAddedPullToRefreshAndInfiniteScrollingHandlers) {
+        __block JMStatefulTableViewController *safeSelf = self;
 
-    [self.tableView addPullToRefreshWithActionHandler:^{
-        [safeSelf _loadFromPullToRefresh];
-    }];
-    
-    [self.tableView addInfiniteScrollingWithActionHandler:^{
-        [safeSelf _loadNextPage];
-    }];
+        [self.tableView addPullToRefreshWithActionHandler:^{
+            [safeSelf _loadFromPullToRefresh];
+        }];
+
+        [self.tableView addInfiniteScrollingWithActionHandler:^{
+            [safeSelf _loadNextPage];
+        }];
+
+        self.hasAddedPullToRefreshAndInfiniteScrollingHandlers = YES;
+    }
 
     [super viewWillAppear:animated];
 }
