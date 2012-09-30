@@ -39,7 +39,12 @@ typedef enum {
 
 @optional
 - (void) statefulTableViewController:(JMStatefulTableViewController *)vc willTransitionToState:(JMStatefulTableViewControllerState)state;
+
+@optional
 - (void) statefulTableViewController:(JMStatefulTableViewController *)vc didTransitionToState:(JMStatefulTableViewControllerState)state;
+
+@optional
+- (BOOL) statefulTableViewControllerShouldPullToRefresh:(JMStatefulTableViewController *)vc;
 
 @end
 

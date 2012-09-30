@@ -297,6 +297,7 @@ static const int kLoadingCellTag = 257;
 
     self.loadingView = nil;
     self.emptyView = nil;
+    self.errorView = nil;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
@@ -304,7 +305,12 @@ static const int kLoadingCellTag = 257;
 
     __block JMStatefulTableViewController *safeSelf = self;
 
-    if(!self.tableView.pullToRefreshView.pullToRefreshActionHandler) {
+    BOOL shouldPullToRefresh = YES;
+    if([self.statefulDelegate respondsToSelector:@selector(statefulTableViewControllerShouldPullToRefresh:)]) {
+        shouldPullToRefresh = [self.statefulDelegate statefulTableViewControllerShouldPullToRefresh:self];
+    }
+
+    if(!self.tableView.pullToRefreshView.pullToRefreshActionHandler && shouldPullToRefresh) {
         [self.tableView addPullToRefreshWithActionHandler:^{
             [safeSelf _loadFromPullToRefresh];
         }];
