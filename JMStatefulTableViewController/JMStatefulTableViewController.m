@@ -20,7 +20,7 @@ static const int kLoadingCellTag = 257;
 @interface JMStatefulTableViewController ()
 
 @property (nonatomic, assign) BOOL isCountingRows;
-@property (nonatomic, assign) BOOL hasAddedPullToRefreshAndInfiniteScrollingHandlers;
+@property (nonatomic, assign) BOOL hasAddedPullToRefreshControl;
 
 // Loading
 
@@ -40,18 +40,6 @@ static const int kLoadingCellTag = 257;
 @end
 
 @implementation JMStatefulTableViewController
-
-@synthesize statefulState = _statefulState;
-
-@synthesize loadingView = _loadingView;
-@synthesize emptyView = _emptyView;
-@synthesize errorView = _errorView;
-
-@synthesize statefulDelegate = _statefulDelegate;
-
-@synthesize isCountingRows = _isCountingRows;
-
-@synthesize hasAddedPullToRefreshAndInfiniteScrollingHandlers = _hasAddedPullToRefreshAndInfiniteScrollingHandlers;
 
 - (id) initWithStyle:(UITableViewStyle)style {
     self = [super initWithStyle:style];
@@ -145,12 +133,12 @@ static const int kLoadingCellTag = 257;
         }
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
-        [self.tableView.pullToRefreshView stopAnimating];
+        [self _pullToRefreshFinishedLoading];
     } failure:^(NSError *error) {
         //TODO: What should we do here?
 
         self.statefulState = JMStatefulTableViewControllerStateIdle;
-        [self.tableView.pullToRefreshView stopAnimating];
+        [self _pullToRefreshFinishedLoading];
     }];
 }
 
@@ -208,6 +196,13 @@ static const int kLoadingCellTag = 257;
     }
 
     return totalHeight;
+}
+
+- (void) _pullToRefreshFinishedLoading {
+    [self.tableView.pullToRefreshView stopAnimating];
+    if([self respondsToSelector:@selector(refreshControl)]) {
+        [self.refreshControl endRefreshing];
+    }
 }
 
 #pragma mark - Setter Overrides
@@ -310,10 +305,17 @@ static const int kLoadingCellTag = 257;
         shouldPullToRefresh = [self.statefulDelegate statefulTableViewControllerShouldPullToRefresh:self];
     }
 
-    if(!self.tableView.pullToRefreshView.pullToRefreshActionHandler && shouldPullToRefresh) {
-        [self.tableView addPullToRefreshWithActionHandler:^{
-            [safeSelf _loadFromPullToRefresh];
-        }];
+    if(!self.hasAddedPullToRefreshControl && shouldPullToRefresh) {
+        if([self respondsToSelector:@selector(refreshControl)]) {
+            self.refreshControl = [[UIRefreshControl alloc] init];
+            [self.refreshControl addTarget:self action:@selector(_loadFromPullToRefresh) forControlEvents:UIControlEventValueChanged];
+        } else {
+            [self.tableView addPullToRefreshWithActionHandler:^{
+                [safeSelf _loadFromPullToRefresh];
+            }];
+        }
+
+        self.hasAddedPullToRefreshControl = YES;
     }
 
     BOOL shouldInfinitelyScroll = YES;
