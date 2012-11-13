@@ -323,10 +323,15 @@ static const int kLoadingCellTag = 257;
         shouldInfinitelyScroll = [self.statefulDelegate statefulTableViewControllerShouldInfinitelyScroll:self];
     }
 
-    if(!self.tableView.infiniteScrollingView.infiniteScrollingActionHandler && shouldInfinitelyScroll) {
-        [self.tableView addInfiniteScrollingWithActionHandler:^{
-            [safeSelf _loadNextPage];
-        }];
+    if (shouldInfinitelyScroll) {
+        if(self.tableView.infiniteScrollingView.infiniteScrollingActionHandler == nil) {
+            [self.tableView addInfiniteScrollingWithActionHandler:^{
+                [safeSelf _loadNextPage];
+            }];
+        }
+    } else {
+        self.tableView.infiniteScrollingView.infiniteScrollingActionHandler = nil;
+        self.tableView.tableFooterView = nil;
     }
 
     [super viewWillAppear:animated];
