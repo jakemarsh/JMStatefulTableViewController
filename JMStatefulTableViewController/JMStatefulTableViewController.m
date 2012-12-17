@@ -282,6 +282,8 @@ static const int kLoadingCellTag = 257;
 
     self.errorView = [[JMStatefulTableViewErrorView alloc] initWithFrame:self.tableView.bounds];
     self.errorView.backgroundColor = [UIColor redColor];
+
+    self.hasAddedPullToRefreshControl = NO;
 }
 
 - (void) viewDidLoad {
@@ -296,8 +298,6 @@ static const int kLoadingCellTag = 257;
 }
 
 - (void) viewWillAppear:(BOOL)animated {
-    [self _loadFirstPage];
-
     __block JMStatefulTableViewController *safeSelf = self;
 
     BOOL shouldPullToRefresh = YES;
@@ -333,6 +333,8 @@ static const int kLoadingCellTag = 257;
         self.tableView.infiniteScrollingView.infiniteScrollingActionHandler = nil;
         self.tableView.tableFooterView = nil;
     }
+
+    [self _loadFirstPage];
 
     [super viewWillAppear:animated];
 }
