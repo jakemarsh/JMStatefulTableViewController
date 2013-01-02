@@ -323,8 +323,18 @@ static const int kLoadingCellTag = 257;
         shouldInfinitelyScroll = [self.statefulDelegate statefulTableViewControllerShouldInfinitelyScroll:self];
     }
 
+    [self updateInfiniteScrollingHandlerAndFooterView:shouldInfinitelyScroll];
+
+    [self _loadFirstPage];
+
+    [super viewWillAppear:animated];
+}
+
+- (void) updateInfiniteScrollingHandlerAndFooterView:(BOOL)shouldInfinitelyScroll {
     if (shouldInfinitelyScroll) {
         if(self.tableView.infiniteScrollingView.infiniteScrollingActionHandler == nil) {
+            __block JMStatefulTableViewController *safeSelf = self;
+            
             [self.tableView addInfiniteScrollingWithActionHandler:^{
                 [safeSelf _loadNextPage];
             }];
@@ -333,10 +343,6 @@ static const int kLoadingCellTag = 257;
         self.tableView.infiniteScrollingView.infiniteScrollingActionHandler = nil;
         self.tableView.tableFooterView = nil;
     }
-
-    [self _loadFirstPage];
-
-    [super viewWillAppear:animated];
 }
 
 - (BOOL) shouldAutorotateToInterfaceOrientation:(UIInterfaceOrientation)interfaceOrientation {

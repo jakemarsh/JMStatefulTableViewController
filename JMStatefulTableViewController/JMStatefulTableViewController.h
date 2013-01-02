@@ -63,4 +63,6 @@ typedef enum {
 
 - (void) loadNewer;
 
+- (void) updateInfiniteScrollingHandlerAndFooterView:(BOOL)shouldInfinitelyScroll;
+
 @end
