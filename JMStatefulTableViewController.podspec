@@ -19,5 +19,5 @@ Pod::Spec.new do |s|
 
   s.source_files = ['JMStatefulTableViewController/*.*']
 
-  s.dependency 'SVPullToRefresh'  
+  s.dependency 'SVPullToRefresh', '0.2'
 end
