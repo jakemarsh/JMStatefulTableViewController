@@ -3,9 +3,15 @@ PODS:
 - SVPullToRefresh (0.2)
 
 DEPENDENCIES:
-- SVPullToRefresh (= 0.2)
+- SVPullToRefresh (from `git://github.com/samvermette/SVPullToRefresh.git', commit
+  `1362d86a52a53baa96cbd4e15ad46d50418fe4fa')
+
+EXTERNAL SOURCES:
+  SVPullToRefresh:
+    :git: git://github.com/samvermette/SVPullToRefresh.git
+    :commit: 1362d86a52a53baa96cbd4e15ad46d50418fe4fa
 
 SPEC CHECKSUMS:
-  SVPullToRefresh: cafc40e50668d7ce0119b7d99270a4cc0cfe5cce
+  SVPullToRefresh: d95803a9816d3919378ede69342c54927fb953ea
 
 COCOAPODS: 0.16.0
