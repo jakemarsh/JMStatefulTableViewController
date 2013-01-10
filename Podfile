@@ -1,3 +1,3 @@
 platform :ios
 
-pod 'SVPullToRefresh'
+pod 'SVPullToRefresh', '0.2'

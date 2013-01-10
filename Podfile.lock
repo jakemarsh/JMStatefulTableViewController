@@ -1,5 +1,11 @@
+
 PODS:
-  - SVPullToRefresh (0.2)
+- SVPullToRefresh (0.2)
 
 DEPENDENCIES:
-  - SVPullToRefresh
+- SVPullToRefresh (= 0.2)
+
+SPEC CHECKSUMS:
+  SVPullToRefresh: cafc40e50668d7ce0119b7d99270a4cc0cfe5cce
+
+COCOAPODS: 0.16.0
