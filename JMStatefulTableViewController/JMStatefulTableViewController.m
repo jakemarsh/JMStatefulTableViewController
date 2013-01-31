@@ -124,9 +124,9 @@ static const int kLoadingCellTag = 257;
             //Offset by the height of the pull to refresh view when it's expanded:
             CGFloat offset = 0.0f;
             if(self.refreshControl) {
-                offset = self.refreshControl.height;
+                offset = self.refreshControl.frame.size.height
             } else {
-                offset = self.tableView.pullToRefreshView.height;
+                offset = self.tableView.pullToRefreshView.frame.size.height;
             }
 
             [self.tableView setContentInset:UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f)];
