@@ -121,8 +121,15 @@ static const int kLoadingCellTag = 257;
         if([indexPaths count] > 0) {
             CGFloat totalHeights = [self _cumulativeHeightForCellsAtIndexPaths:indexPaths];
 
-            //Offset by the height fo the pull to refresh view when it's expanded:
-            [self.tableView setContentInset:UIEdgeInsetsMake(0.0f, 0.0f, 0.0f, 0.0f)];
+            //Offset by the height of the pull to refresh view when it's expanded:
+            CGFloat offset = 0.0f;
+            if(self.refreshControl) {
+                offset = self.refreshControl.height;
+            } else {
+                offset = self.tableView.pullToRefreshView.height;
+            }
+
+            [self.tableView setContentInset:UIEdgeInsetsMake(offset, 0.0f, 0.0f, 0.0f)];
             [self.tableView reloadData];
 
             if(self.tableView.contentOffset.y == 0) {
