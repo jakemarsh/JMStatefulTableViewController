@@ -8,10 +8,15 @@
 
 #import "JMStatefulTableViewController.h"
 
-@interface SVPullToRefresh ()
+@interface SVPullToRefreshView ()
 
 @property (nonatomic, copy) void (^pullToRefreshActionHandler)(void);
-@property (nonatomic, copy) void (^infiniteScrollingActionHandler)(void);
+
+@end
+
+@interface SVInfiniteScrollingView ()
+
+@property (nonatomic, copy) void (^infiniteScrollingHandler)(void);
 
 @end
 
@@ -340,7 +345,7 @@ static const int kLoadingCellTag = 257;
 
 - (void) updateInfiniteScrollingHandlerAndFooterView:(BOOL)shouldInfinitelyScroll {
     if (shouldInfinitelyScroll) {
-        if(self.tableView.infiniteScrollingView.infiniteScrollingActionHandler == nil) {
+        if(self.tableView.infiniteScrollingView.infiniteScrollingHandler == nil) {
             __block JMStatefulTableViewController *safeSelf = self;
             
             [self.tableView addInfiniteScrollingWithActionHandler:^{
@@ -348,7 +353,7 @@ static const int kLoadingCellTag = 257;
             }];
         }
     } else {
-        self.tableView.infiniteScrollingView.infiniteScrollingActionHandler = nil;
+        self.tableView.infiniteScrollingView.infiniteScrollingHandler = nil;
         self.tableView.tableFooterView = nil;
     }
 }
