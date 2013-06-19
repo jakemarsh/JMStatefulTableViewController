@@ -229,6 +229,8 @@ static const int kLoadingCellTag = 257;
 
     switch (_statefulState) {
         case JMStatefulTableViewControllerStateIdle:
+            [self.tableView.infiniteScrollingView stopAnimating];
+            
             self.tableView.backgroundView = nil;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleSingleLine;
             self.tableView.scrollEnabled = YES;
@@ -249,6 +251,8 @@ static const int kLoadingCellTag = 257;
             break;
 
         case JMStatefulTableViewControllerStateEmpty:
+            [self.tableView.infiniteScrollingView stopAnimating];
+            
             self.tableView.backgroundView = self.emptyView;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             self.tableView.scrollEnabled = NO;
@@ -265,6 +269,8 @@ static const int kLoadingCellTag = 257;
             break;
             
         case JMStatefulTableViewControllerError:
+            [self.tableView.infiniteScrollingView stopAnimating];
+            
             self.tableView.backgroundView = self.errorView;
             self.tableView.separatorStyle = UITableViewCellSeparatorStyleNone;
             self.tableView.scrollEnabled = NO;
